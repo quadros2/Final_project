@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="530dp"
+            android:background="#F44336"
+            android:shadowColor="#00DA1616"
+            android:text="@string/string_math_madness"
+            android:textColor="#092BF0"
+            android:textColorHighlight="#E41818"
+            android:textSize="80sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/Play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4CAF50"
+            android:text="@string/play_game"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/creators"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/by_sam_ahnert_and_lloyd_quadros" />
+    </LinearLayout>
+</ScrollView>
