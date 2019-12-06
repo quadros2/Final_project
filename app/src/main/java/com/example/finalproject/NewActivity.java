@@ -1,5 +1,7 @@
 package com.example.finalproject;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,7 @@ public class NewActivity extends AppCompatActivity {
     private int ans;
     private String operation;
     private static int score = 0;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,32 +26,34 @@ public class NewActivity extends AppCompatActivity {
         generateNumber();
         Button checkAnswer = findViewById(R.id.checkAnswer);
         checkAnswer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 EditText userAnswer = findViewById(R.id.userAnswer);
                 int compare = Integer.parseInt(userAnswer.getText().toString());
                 if (compare == ans) {
-                    generateNumber();
+                    //generateNumber();
                     score++;
+                    correct();
                 } else {
                     endGame();
                 }
             }
         });
     }
+
     private void generateNumber() {
         startNum = (int) (Math.random() * 100);
         secondNum = (int) (Math.random() * 100);
         switch (pemdas()) {
-            case(1):
+            case (1):
                 operation = " multiplied by ";
                 ans = (startNum * secondNum);
                 break;
-            case(2):
+            case (2):
                 operation = " divided by ";
                 ans = (int) (startNum / secondNum);
                 break;
-            case(3):
+            case (3):
                 operation = " minus ";
                 if (secondNum > startNum) {
                     int swap = secondNum;
@@ -66,22 +71,42 @@ public class NewActivity extends AppCompatActivity {
         String tellUser = instIntro + Integer.toString(startNum) + operation + String.valueOf(secondNum) + " equals?";
         tellTheUser.setText(tellUser);
     }
+
     private int pemdas() {
         double decimal = (4 * Math.random());
         return (int) decimal;
     }
+
     private void endGame() {
+        final Intent intent = new Intent(this, MainActivity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("You were wrong :(... upload score?");
         builder.setNegativeButton("Upload", null); //need to put webAPI stuff
-        builder.setPositiveButton("Go back to home", null); //just go back home
+        builder.setPositiveButton("Go back to home", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(intent);
+            }
+        }); //just go back home
         builder.create().show();
     }
-//    private void correct() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage("Correct!");
-//        builder.setNegativeButton("Yes, continue!", null); //refresh somehow
-//        builder.setPositiveButton("Go back to home", null); //just go back home
-//        builder.create().show();
-//    }
+
+    private void correct() {
+        final Intent intent = new Intent(this, MainActivity.class);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Correct!");
+        builder.setNegativeButton("Yes, continue!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                generateNumber();
+            }
+        }); //refresh somehow
+        builder.setPositiveButton("Go back to home", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(intent);
+            }
+        }); //just go back home
+        builder.create().show();
+    }
 }
