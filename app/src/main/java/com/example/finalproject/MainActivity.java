@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeView() {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, NewActivity.class);
         startActivity(intent);
     }
 }

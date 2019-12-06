@@ -4,21 +4,26 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/command"
+        android:id="@+id/inst"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="130dp" />
 
     <EditText
-        android:id="@+id/answer"
+        android:id="@+id/userAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="number"
+        android:text="@string/answer" />
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/checkAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/check_answer" />
 </LinearLayout>

@@ -3,4 +3,6 @@
     <string name="string_math_madness">MATH MADNESS</string>
     <string name="play_game">PLAY GAME</string>
     <string name="by_sam_ahnert_and_lloyd_quadros">By: Sam Ahnert and Lloyd Quadros</string>
+    <string name="check_answer">Check Answer</string>
+    <string name="answer">Answer</string>
 </resources>
