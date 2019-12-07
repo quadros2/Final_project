@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="530dp"
+            android:layout_height="447dp"
             android:background="#F44336"
             android:shadowColor="#00DA1616"
             android:text="@string/string_math_madness"
@@ -36,5 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/by_sam_ahnert_and_lloyd_quadros" />
+
     </LinearLayout>
 </ScrollView>
