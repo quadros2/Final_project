@@ -2,7 +2,10 @@ package com.example.finalproject;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.se.omapi.Session;
 import android.text.InputType;
 import android.view.View;
 import android.view.textclassifier.TextLinks;
@@ -26,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 public class NewActivity extends AppCompatActivity {
     private int startNum; // COULD MAKE DIFFERENT LEVELS AND CHANGE THE DIFFICULTY HERE(ie 10 instead of 100)
@@ -33,8 +37,9 @@ public class NewActivity extends AppCompatActivity {
     private int ans;
     private String operation;
     private static int score = 0;
-    private String data;
-    private String UserName = "";
+    //private String data;
+    private String user = "";
+    //MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -49,10 +54,11 @@ public class NewActivity extends AppCompatActivity {
                 EditText userAnswer = findViewById(R.id.userAnswer);
                 int compare = Integer.parseInt(userAnswer.getText().toString());
                 if (compare == ans) {
-                    //generateNumber();
+                    soundEffect("dub");
                     score++;
                     correct();
                 } else {
+                    soundEffect("nope");
                     endGame();
                 }
             }
@@ -95,41 +101,11 @@ public class NewActivity extends AppCompatActivity {
         return (int) decimal;
     }
 
-    private void getName() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter Name");
-
-// Set up the input
-        final EditText input = new EditText(this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-// Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                UserName = input.getText().toString();
-                uploadScore(UserName, score);
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
 
     private void endGame() {
         final Intent intent = new Intent(this, MainActivity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("You were wrong :(... upload score?");
-        builder.setNegativeButton("Upload", (dialogInterface, i) -> {
-            getName();
-        }); //need to put webAPI stuff
+        builder.setMessage("You were wrong :(... upload score?");//need to put webAPI stuff
         builder.setPositiveButton("Go back to home", (dialogInterface, i) -> startActivity(intent)); //just go back home
         builder.create().show();
     }
@@ -153,8 +129,17 @@ public class NewActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void uploadScore(String user, int score) {
-
+    private void soundEffect(String a) {
+        if (a.equals("dub")) {
+            int resID = getResources().getIdentifier("ding", "raw", getPackageName());
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, resID);
+            mediaPlayer.start();
+        }
+        if (a.equals("nope")) {
+            int resID = getResources().getIdentifier("wrong", "raw", getPackageName());
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, resID);
+            mediaPlayer.start();
+        }
     }
 }
 

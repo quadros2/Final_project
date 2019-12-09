@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         play.setVisibility(View.VISIBLE);
         TextView creators = findViewById(R.id.creators);
         creators.setVisibility(View.VISIBLE);
+        int resID = getResources().getIdentifier("intro", "raw", getPackageName());
+        mediaPlayer = MediaPlayer.create(this, resID);
+        mediaPlayer.start();
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeView() {
+        mediaPlayer.stop();
         Intent intent = new Intent(this, NewActivity.class);
         startActivity(intent);
     }
