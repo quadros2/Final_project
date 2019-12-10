@@ -105,7 +105,7 @@ public class NewActivity extends AppCompatActivity {
     private void endGame() {
         final Intent intent = new Intent(this, MainActivity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("You were wrong :(... upload score?");//need to put webAPI stuff
+        builder.setMessage("You were wrong :(");//need to put webAPI stuff
         builder.setPositiveButton("Go back to home", (dialogInterface, i) -> startActivity(intent)); //just go back home
         builder.create().show();
     }
